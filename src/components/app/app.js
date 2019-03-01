@@ -12,33 +12,38 @@ import Row from '../row';
 export default class App extends Component {
 
   state = {
-    questionArea: 0
+    questionArea: 'empty'
   };
 
   onCategorySelect = (id) => {
     this.setState({
-      questionArea: 1,
-      question: id
+      questionArea: 'question list',
+      currentCategory: id
     });
   };
 
-  onQuestionSelect = () => {
+  onQuestionSelect = (id) => {
     this.setState({
-      questionArea: 2
+      questionArea: 'show question',
+      currentQuestion: id
     });
   };
 
   render() {
 
-    const { questionArea, question } = this.state
+    const { questionArea, currentCategory, currentQuestion } = this.state
     let content = <Empty />
 
-    if (questionArea === 0) content = <Empty />
-    else if (questionArea === 1) {
-      content = <QuestionList id={question}
+    if (questionArea === 'empty') content = <Empty />
+    else if (questionArea === 'question list') {
+      content = <QuestionList id={currentCategory}
                   onQuestionSelect={ this.onQuestionSelect }/>
     }
-    else if (questionArea === 2) content = <Question />
+    else if (questionArea === 'show question') {
+      content = <Question 
+                  currentQuestion={ currentQuestion }
+                  currentCategory={ currentCategory }/>
+    }
 
     return (
       <div className="app">

@@ -15,7 +15,7 @@ const QuestionList = (props) => {
       return (
         <li className="list-group-item"
           key={ i }
-          onClick={ () => onQuestionSelect() }>
+          onClick={ () => onQuestionSelect(i) }>
           { question }
         </li>
       );
