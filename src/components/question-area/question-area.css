@@ -1,0 +1,14 @@
+.question-area textarea{
+  width: 100%;
+  border: 0;
+  resize:none;
+  height: 100px;
+}
+
+.question-area textarea:disabled{
+  width: 100%;
+  background-color: #eeeeee;
+  border: 0;
+  resize:none;
+  height: 100px;
+}

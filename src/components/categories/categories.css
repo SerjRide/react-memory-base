@@ -1,0 +1,14 @@
+.list-group-item {
+  cursor: pointer;
+  color: #616161;
+}
+
+.list-group-item:hover {
+  background-color: #F3EFFC;
+}
+
+.no-active {
+  cursor: default;
+  font-weight: bold;
+  background-color: #F3EFFC;
+}

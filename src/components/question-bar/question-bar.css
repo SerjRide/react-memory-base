@@ -1,0 +1,15 @@
+.btn-group-md .btn {
+  padding: 18px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type='number'] {
+  background-color: white;
+    text-align: center;
+    -moz-appearance: textfield;
+}
