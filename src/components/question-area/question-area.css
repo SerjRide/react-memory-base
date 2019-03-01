@@ -3,12 +3,19 @@
   border: 0;
   resize:none;
   height: 100px;
+  border-right: solid 1px #CFCFCF;
+}
+
+
+.question-area textarea:nth-child(2) {
+  margin-top: -7px;
+  margin-bottom: -6px;
+  border-top: solid 1px #CFCFCF;
 }
 
 .question-area textarea:disabled{
   width: 100%;
-  background-color: #eeeeee;
-  border: 0;
+  background-color: white;
   resize:none;
   height: 100px;
 }

@@ -1,5 +1,19 @@
-.btn-group-md .btn {
-  padding: 18px;
+.btn-group {
+  border: solid 1px #E2E2E2;
+  width: 100%;
+  height: 48px;
+}
+
+.btn.btn-secondary {
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4%;
+  background-color: #f3effc;
+  width: 5%;
+}
+
+.btn.btn-secondary:hover {
+  background-color: #E1D9F5;
 }
 
 input::-webkit-outer-spin-button,
@@ -9,7 +23,9 @@ input::-webkit-inner-spin-button {
 }
 
 input[type='number'] {
-  background-color: white;
+  background-color: #f3effc;
+  padding-left: 0;
+  padding-right: 0;
     text-align: center;
     -moz-appearance: textfield;
 }

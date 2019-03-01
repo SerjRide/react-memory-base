@@ -30,7 +30,7 @@ const QuestionBar = () => {
       <div className="input-group">
         <input type="number"
           className="form-control"
-          placeholder="Input group example"
+          placeholder="1"
           aria-label="Input group example"
           aria-describedby="btnGroupAddon"/>
       </div>

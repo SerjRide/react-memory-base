@@ -2,27 +2,29 @@ import React from 'react';
 
 import './categories.css';
 
-const Categories = () => {
+import QuestionData from '../../service/question-data';
+
+const Categories = (props) => {
+
+  const { onCategorySelect } = props;
+
+  const items = QuestionData.map((item, i) => {
+    const { name } = item[0], id = i;
+    return (
+      <li className="list-group-item"
+        key = { id }
+        onClick={ () => onCategorySelect(id) }>
+        { name }
+      </li>
+    );
+  });
+
   return(
     <ul className="list-group">
       <li className="list-group-item no-active">
         Category Selection:
       </li>
-      <li className="list-group-item">
-        HTML
-      </li>
-      <li className="list-group-item">
-        CSS
-      </li>
-      <li className="list-group-item">
-        JavaScript
-      </li>
-      <li className="list-group-item">
-        React
-      </li>
-      <li className="list-group-item">
-        Other
-      </li>
+      {items}
     </ul>
   );
 };
