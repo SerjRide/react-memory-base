@@ -41,7 +41,7 @@ const QuestionBar = (props) => {
           aria-label="Input group example"
           aria-describedby="btnGroupAddon"/>
       </div>
-      <button
+      <button id="onNextClick"
          type="button" onClick={ onNextClick }
          className="btn btn-secondary">
          <i className="fas fa-angle-right"></i>

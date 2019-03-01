@@ -27,9 +27,7 @@ export default class QuestionArea extends Component {
 
   onEnterApply  = (e) => {
     if (e.which === 13) {
-      console.log(document.getElementById('answer').value);
-      e.stopPropagation();
-      e.nativeEvent.stopImmediatePropagation();
+      e.preventDefault();
       this.applyClick();
     }
   };
@@ -41,7 +39,7 @@ export default class QuestionArea extends Component {
       <div className='question-area'>
         <textarea disabled placeholder={ question }></textarea>
         <textarea id="answer" onChange={ this.onAnswerChange }
-        onKeyUp={ this.onEnterApply }/>
+        onKeyDown={ this.onEnterApply }/>
         <button
           type="button" onClick={ this.applyClick }
           className="btn btn-success btn-sm btn-block">
