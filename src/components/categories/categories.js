@@ -29,10 +29,15 @@ export default class Categories extends Component {
   };
 
   delCategory = (id) => {
-    this.props.onDelCategory();
-    console.log(`Delete: ${id}`)
-    removeCategory(id+1);
-    this.setState({update: this.state.update + 1 });
+    const text = `
+    Are you sure?
+    Все вопросы содержащиеся в этой категории будут удалены безвозвратно!`
+    if (window.confirm(text)) {
+      this.props.onDelCategory();
+      console.log(`Delete: ${id}`)
+      removeCategory(id+1);
+      this.setState({update: this.state.update + 1 });
+    }
   }
 
   renderList = () => {

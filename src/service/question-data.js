@@ -98,8 +98,27 @@ const removeCategory = (i) => {
   setBase(QuestionData);
 };
 
+const createQuestion = (currentCategory, question, answer) => {
+  QuestionData[currentCategory].push({
+    question: question,
+    answer: answer
+  });
+  setBase(QuestionData);
+};
+
+const removeQuestion = (currentCategory, i) => {
+  QuestionData[currentCategory].splice(i,1);
+  setBase(QuestionData);
+}
+
+// createQuestion(2,'Lorem ipsum?','Lorem ipsum dolores');
+
+// removeQuestion(2,4)
+
 export {
   QuestionData,
   createCategory,
-  removeCategory
+  removeCategory,
+  createQuestion,
+  removeQuestion
 }
