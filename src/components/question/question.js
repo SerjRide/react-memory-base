@@ -12,13 +12,9 @@ export default class Question extends Component {
     help: 0
   };
 
-  onAddClick = () => {
-    console.log('onAddClick');
-  };
+  onAddClick = () => console.log('onAddClick');
 
-  onBookmarksClick = () => {
-    console.log('onBookmarksClick');
-  };
+  onBookmarksClick = () => console.log('onBookmarksClick');
 
   onFirstClick = () => {
     this.setState({currentQuestion: 1});
@@ -49,12 +45,36 @@ export default class Question extends Component {
     document.getElementById('answer').value = '';
   };
 
-  onHelpClick = () => {
-    this.setState({help: this.state.help + 1});
+  onHelpClick = () => this.setState({help: this.state.help + 1});
+
+  onDelClick = () => console.log('onDelClick');
+
+  onApplyClick = () => {
+    const currenAnswer = document.getElementById('answer').value;
+    const { currentCategory } = this.props;
+    const { currentQuestion } = this.state;
+    const { answer } = QuestionData[currentCategory][currentQuestion]
+    if (currenAnswer === answer) {
+      document.getElementById('answer').value = '';
+      this.onNextClick();
+    } else alert('Ответ не верный');
+  }
+
+  onQuestionClick = (e) => e.target.select();
+
+  onEnterSelect = () => {
+    const selectQuestion = document.getElementById('questionNumber').value;
+    const length = QuestionData[this.props.currentCategory].length
+    if (selectQuestion > length - 1 || selectQuestion < 1) {
+      alert('Вопрос не найден');
+    }else this.setState({ currentQuestion: selectQuestion });
   };
 
-  onDelClick = () => {
-    console.log('onDelClick');
+  onEnter = (e,func) => {
+    if (e.which === 13) {
+      e.preventDefault();
+      func();
+    }
   };
 
   render(){
@@ -65,21 +85,25 @@ export default class Question extends Component {
     return(
       <React.Fragment>
         <QuestionBar
+          onQuestionClick={ this.onQuestionClick }
           currentQuestion={ currentQuestion }
-          onAddClick = {this.onAddClick}
-          onBookmarksClick = {this.onBookmarksClick}
-          onFirstClick = {this.onFirstClick}
-          onPrevClick = {this.onPrevClick}
-          onNextClick = {this.onNextClick}
-          onLastClick = {this.onLastClick}
-          onHelpClick = {this.onHelpClick}
-          onDelClick = {this.onDelClick}/>
+          onAddClick = { this.onAddClick }
+          onBookmarksClick = { this.onBookmarksClick }
+          onFirstClick = { this.onFirstClick }
+          onPrevClick = { this.onPrevClick }
+          onNextClick = { this.onNextClick }
+          onLastClick = { this.onLastClick }
+          onHelpClick = { this.onHelpClick }
+          onDelClick = { this.onDelClick }
+          onEnterSelect = { (e) => this.onEnter(e,this.onEnterSelect) }/>
         <QuestionArea
-          currentCategory={ currentCategory }
-          currentQuestion={ currentQuestion }
-          question={ question }
-          answer={ answer }
-          help={ help }/>
+          onEnterApply = { (e) => this.onEnter(e,this.onApplyClick) }
+          onApplyClick = { this.onApplyClick }
+          currentCategory = { currentCategory }
+          currentQuestion = { currentQuestion }
+          question = { question }
+          answer = { answer }
+          help = { help }/>
       </React.Fragment>
     )
   };

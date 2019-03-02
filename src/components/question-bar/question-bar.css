@@ -23,6 +23,7 @@ input::-webkit-inner-spin-button {
 }
 
 input[type='number'] {
+  cursor: pointer;
   background-color: #f3effc;
   padding-left: 0;
   padding-right: 0;
