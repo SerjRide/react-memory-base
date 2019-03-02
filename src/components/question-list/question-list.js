@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './question-list.css';
 
@@ -13,10 +14,10 @@ const QuestionList = (props) => {
 
     if (i !== 0) {
       return (
-        <li className="list-group-item"
-          key={ i }
-          onClick={ () => onQuestionSelect(i) }>
-          { question }
+        <li className="list-group-item" key={ i }>
+          <Link to="/" onClick={ () => onQuestionSelect(i) }>
+             { question }
+          </Link>
         </li>
       );
     }else return null;
@@ -24,10 +25,11 @@ const QuestionList = (props) => {
 
   if (items.length === 1) {
     items = (
-      <li className="list-group-item add-ansver"
-        onClick={ onAddQuestion }>
-        <i className="fas fa-plus"></i>
-          Add answers
+      <li className="list-group-item add-ansver">
+        <i className="fas fa-plus my"></i>
+        <Link to="/" onClick={ onAddQuestion }>
+           Add answers
+        </Link>
       </li>
     )
   }
@@ -35,7 +37,7 @@ const QuestionList = (props) => {
   return(
     <ul className="list-group">
       <li className="list-group-item no-active">
-        <i className="item">Choice of question:</i>
+        <Link to="/" className="item">Choice of question:</Link>
         <button
            type="button"
            className="btn btn-secondary">

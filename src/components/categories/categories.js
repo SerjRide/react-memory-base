@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import './categories.css';
 
@@ -23,11 +24,12 @@ export default class Categories extends Component {
 
   addCategory = () => {
     console.log('add category');
-    createCategory('TEST');
+    createCategory('New Category');
     this.setState({update: this.state.update + 1 });
   };
 
   delCategory = (id) => {
+    this.props.onDelCategory();
     console.log(`Delete: ${id}`)
     removeCategory(id+1);
     this.setState({update: this.state.update + 1 });
@@ -36,19 +38,20 @@ export default class Categories extends Component {
   renderList = () => {
     const { onCategorySelect } = this.props;
     const items = QuestionData.map((item, i) => {
-      console.log(item);
       const { name } = item[0], id = i;
       return (
-        <li className="list-group-item"
-          key = { id }
-          onClick={ () => onCategorySelect(id) }>
-          <i className='item'>{ name }</i>
+        <li className="list-group-item" key = { id }>
+          <Link to="/"
+             onClick={ () => onCategorySelect(id) }>
+            { name }
+          </Link>
           <button
              type="button" onClick={ () => this.delCategory(id) }
              className="btn btn-secondary list">
              <i className="far fa-trash-alt"></i>
           </button>
         </li>
+
       );
     });
     this.setState({items: items});
@@ -58,12 +61,10 @@ export default class Categories extends Component {
 
     const { items } = this.state;
 
-    // removeCategory(4);
-
     return(
       <ul className="list-group">
         <li className="list-group-item no-active">
-          <i className="item">Category Selection:</i>
+          <Link to="/" className="item">Category Selection:</Link>
           <button onClick={ this.addCategory }
              type="button"
              className="btn btn-secondary">

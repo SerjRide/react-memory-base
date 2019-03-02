@@ -6,11 +6,19 @@
   color: #616161;
 }
 
-.list-group-item i.item {
+.list-group-item button {
+  position:relative;
+  z-index: 9999;
+}
+
+.list-group-item a {
+  text-decoration: none;
   display: block;
   font-style: normal;
-  margin: 10px 20px;
-  width: auto;
+  width: 90%;
+  height: 45px;
+  padding-top: 11px;
+  padding-left: 20px;
 }
 
 .list-group-item:hover {

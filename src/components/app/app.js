@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom'
 import './app.css';
 
 import Header from '../header';
@@ -33,6 +34,11 @@ export default class App extends Component {
     console.log('add question');
   };
 
+  onDelCategory = () => {
+    console.log(`APP del category`)
+    this.setState({questionArea: 'empty'})
+  };
+
   render() {
 
     const { questionArea, currentCategory, currentQuestion } = this.state
@@ -52,10 +58,14 @@ export default class App extends Component {
 
     return (
       <div className="app">
-        <Header />
-        <Row
-          left={<Categories onCategorySelect={ this.onCategorySelect }/>}
-          right={content}/>
+          <Header />
+          <Router>
+          <Row
+            left={<Categories
+                   onCategorySelect={ this.onCategorySelect }
+                   onDelCategory={ this.onDelCategory }/>}
+            right={content}/>
+        </Router>
       </div>
     );
   };
