@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import QuestionBar from '../question-bar';
 import QuestionArea from '../question-area';
 
-import QuestionData from '../../service/question-data';
+import { QuestionData } from '../../service/question-data';
 
 export default class Question extends Component {
 
@@ -63,11 +63,15 @@ export default class Question extends Component {
   onQuestionClick = (e) => e.target.select();
 
   onEnterSelect = () => {
+    const { currentQuestion } = this.props
     const selectQuestion = document.getElementById('questionNumber').value;
+    document.getElementById('answer').value = '';
     const length = QuestionData[this.props.currentCategory].length
     if (selectQuestion > length - 1 || selectQuestion < 1) {
       alert('Вопрос не найден');
-    }else this.setState({ currentQuestion: selectQuestion });
+      document.getElementById('questionNumber').value = currentQuestion;
+      document.getElementById('questionNumber').select();
+    }else this.setState({ currentQuestion: Number(selectQuestion) });
   };
 
   onEnter = (e,func) => {

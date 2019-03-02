@@ -8,6 +8,7 @@ export default class QuestionArea extends Component {
     const {answer, help} = this.props
     if (help !== prevProps.help) {
       document.getElementById('answer').value = answer;
+      document.getElementById('answer').focus();
     };
   };
 

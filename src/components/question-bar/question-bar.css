@@ -8,12 +8,12 @@
   padding-top: 0;
   padding-bottom: 0;
   padding-left: 4%;
-  background-color: #f3effc;
+  background-color: #f4fcef;
   width: 5%;
 }
 
 .btn.btn-secondary:hover {
-  background-color: #E1D9F5;
+  background-color: #DAE4D3;
 }
 
 input::-webkit-outer-spin-button,
@@ -24,7 +24,7 @@ input::-webkit-inner-spin-button {
 
 input[type='number'] {
   cursor: pointer;
-  background-color: #f3effc;
+  background-color: #f4fcef;
   padding-left: 0;
   padding-right: 0;
     text-align: center;

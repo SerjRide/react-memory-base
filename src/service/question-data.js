@@ -1,5 +1,4 @@
-
-const QuestionData = [
+const Base = [
 
   // Категория 1
   [
@@ -62,14 +61,12 @@ const QuestionData = [
 
     // Вопрос 2
     {
-      id: 1,
       question: 'Категория 3 - Вопрос 2',
       answer: 'Категория 3 - Ответ 2'
     },
 
     // Вопрос 3
     {
-      id: 2,
       question: 'Категория 3 - Вопрос 3',
       answer: 'Категория 3 - Ответ 3'
     },
@@ -78,4 +75,31 @@ const QuestionData = [
 
 ];
 
-export default QuestionData;
+if (!localStorage.Base) {
+  const serialObj = JSON.stringify(Base)
+  localStorage.setItem('Base', serialObj)
+}
+
+const QuestionData = JSON.parse(localStorage.getItem("Base"))
+
+const setBase = (data) => {
+  const serialObj = JSON.stringify(data)
+  localStorage.removeItem(Base)
+  localStorage.setItem('Base', serialObj)
+};
+
+const createCategory = (name) => {
+  QuestionData.push([{name: name}])
+  setBase(QuestionData)
+};
+
+const removeCategory = (i) => {
+  QuestionData.splice(i-1,1);
+  setBase(QuestionData);
+};
+
+export {
+  QuestionData,
+  createCategory,
+  removeCategory
+}

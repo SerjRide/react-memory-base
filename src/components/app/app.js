@@ -29,6 +29,10 @@ export default class App extends Component {
     });
   };
 
+  onAddQuestion = () => {
+    console.log('add question');
+  };
+
   render() {
 
     const { questionArea, currentCategory, currentQuestion } = this.state
@@ -36,11 +40,12 @@ export default class App extends Component {
 
     if (questionArea === 'empty') content = <Empty />
     else if (questionArea === 'question list') {
-      content = <QuestionList id={currentCategory}
-                  onQuestionSelect={ this.onQuestionSelect }/>
+      content = <QuestionList id = { currentCategory }
+                  onQuestionSelect = { this.onQuestionSelect }
+                  onAddQuestion = { this.onAddQuestion }/>
     }
     else if (questionArea === 'show question') {
-      content = <Question 
+      content = <Question
                   currentQuestion={ currentQuestion }
                   currentCategory={ currentCategory }/>
     }

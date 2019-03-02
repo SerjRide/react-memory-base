@@ -1,0 +1,8 @@
+i {
+  padding-right: 10px;
+}
+
+.no-active i {
+  font-style: normal;
+  margin: 1.25rem 0;
+}

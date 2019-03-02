@@ -2,3 +2,18 @@
   padding-right: 0px;
   padding-left: 0px;
 }
+
+::selection {
+  color:#fff;
+  background:#4bbf73;
+}
+
+::-moz-selection {
+  color:#fff;
+  background:#4bbf73;
+}
+
+::-webkit-selection {
+  color:#fff;
+  background:#4bbf73;
+}

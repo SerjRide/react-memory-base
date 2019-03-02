@@ -8,6 +8,7 @@ export default class QuestionBar extends Component  {
     const { currentQuestion } = this.props
     if (currentQuestion !== prevProps.currentQuestion) {
       document.getElementById('questionNumber').value = currentQuestion
+      document.getElementById('answer').focus()
     }
   };
 

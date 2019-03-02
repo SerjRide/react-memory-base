@@ -6,7 +6,7 @@ const Empty = () => {
   return(
     <ul className="list-group ">
       <li className="list-group-item no-active">
-        Select a category of questions
+        <i className="item">Select a category of questions</i>
       </li>
     </ul>
   )
