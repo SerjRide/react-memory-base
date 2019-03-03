@@ -2,12 +2,12 @@ import React from 'react';
 
 import './alert.css'
 
-const CorrectAlert = () => {
+const CategoryAlert = () => {
   return(
     <div className="alert alert-success">
-      <b>Success!</b> You answered correctly
+      <b>Success!</b> Question added
     </div>
   )
 };
 
-export default CorrectAlert;
+export default CategoryAlert;

@@ -1,5 +1,6 @@
 .alert {
-  position: absolute;
+  position: fixed;
+  z-index: 9999;
   width: 100%;
   animation-name: alert;
   animation-duration: 2s;

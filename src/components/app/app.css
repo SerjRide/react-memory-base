@@ -17,3 +17,7 @@
   color:#fff;
   background:#4bbf73;
 }
+
+.list-group-item button {
+  z-index: 2!important;
+}

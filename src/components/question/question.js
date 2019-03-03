@@ -55,6 +55,7 @@ export default class Question extends Component {
     const { currentQuestion } = this.state;
     const { answer } = QuestionData[currentCategory][currentQuestion]
     if (currenAnswer === answer) {
+      this.props.getTrueAnswer();
       document.getElementById('answer').value = '';
       this.onNextClick();
     } else alert('Ответ не верный');

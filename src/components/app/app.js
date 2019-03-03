@@ -8,7 +8,11 @@ import QuestionList from '../question-list';
 import Question from '../question';
 import Empty from '../empty';
 import { CategoryForm, QuestionForm } from '../form';
-import { CategoryAlert, QuestionAlert } from '../alert';
+
+import {
+  CategoryAlert,
+  QuestionAlert,
+  CorrectAlert } from '../alert';
 
 import Row from '../row';
 
@@ -17,7 +21,8 @@ export default class App extends Component {
   state = {
     rightContent: 'empty',
     categoryAlert: false,
-    questionAlert: false
+    questionAlert: false,
+    correctAlert: false
   };
 
   // componentDidUpdate(prevProps, prevState) {
@@ -46,7 +51,7 @@ export default class App extends Component {
 
   onDelCategory = () => {
     console.log(`APP del category`)
-    this.setState({rightContent: 'empty'})
+    this.setState({ rightContent: 'empty' })
   };
 
   getCategoryName = () => {
@@ -72,6 +77,12 @@ export default class App extends Component {
     setTimeout(() => this.setState({ questionAlert:false }),2000);
   }
 
+  getTrueAnswer = () => {
+    console.log('true_answer');
+    this.setState({ correctAlert: true });
+    setTimeout(() => this.setState({ correctAlert:false }),2000);
+  };
+
   onBackToList = () => this.onCategorySelect(this.state.currentCategory);
 
   render() {
@@ -96,6 +107,7 @@ export default class App extends Component {
 
     if (rightContent === 'show question') {
       right = <Question
+                   getTrueAnswer={ this.getTrueAnswer }
                    onBackToList={ this.onBackToList }
                    currentQuestion={ currentQuestion }
                    currentCategory={ currentCategory }/>
@@ -118,6 +130,8 @@ export default class App extends Component {
       alert = <CategoryAlert />
     } else if (this.state.questionAlert) {
       alert = <QuestionAlert />
+    } else if (this.state.correctAlert) {
+      alert = <CorrectAlert />
     }
 
     return (
