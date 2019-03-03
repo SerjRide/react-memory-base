@@ -46,3 +46,23 @@ a.crumb i {
   padding-right: 13px;
   margin-top: 6px;
 }
+
+.btn-group.btn-group-md button:hover::after,
+.list-group-item button:hover::after {
+  position: absolute;
+  padding: 11px;
+  top:-46px;
+  left: -75px;
+  color: white;
+  background-color: rgba(76, 191, 115, 0.75);
+  width: 200px;
+  content: attr(data-title);
+  animation-name: tooltip;
+  animation-duration: 1s;
+}
+
+@keyframes tooltip {
+  0%,55% { opacity:0; transform: translateY(-1000px) }
+  60% { transform: translateY(0) }
+  to { opacity:1 }
+}

@@ -57,6 +57,7 @@ export default class Categories extends Component {
           </Link>
           <button
              type="button" onClick={ () => this.delCategory(id) }
+             data-title="Delete Category"
              className="btn btn-secondary list">
              <i className="far fa-trash-alt"></i>
           </button>

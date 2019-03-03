@@ -45,7 +45,8 @@ const CategoryForm = (props) => {
           </div>
           <button
              type="button" onClick={ check }
-             className="btn btn-secondary list">
+             className="btn btn-secondary list"
+             data-title="Add category">
              <i className="fas fa-plus"></i>
           </button>
         </form>

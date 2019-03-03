@@ -57,7 +57,8 @@ export default class QuestionList extends Component {
       button = (
         <button
            type="button" onClick={ () => this.delQuestion(i) }
-           className="btn btn-secondary">
+           className="btn btn-secondary"
+           data-title="Delete question">
            <i className="far fa-trash-alt"></i>
         </button>
       );
@@ -98,15 +99,17 @@ export default class QuestionList extends Component {
 
   render() {
 
-    const { items } = this.state;
+    const { items } = this.state, { id } = this.props
+    const { name } = QuestionData[id][0]
 
     return(
       <ul className="list-group" id="question_list">
         <li className="list-group-item no-active">
-          <Link to="/" className="item">Choice of question:</Link>
+          <Link to="/" className="item">Select question from { name }</Link>
           <button
              type="button" onClick={ this.showForm }
-             className="btn btn-secondary list head">
+             className="btn btn-secondary list head"
+              data-title="Add question">
              <i className="fas fa-plus"></i>
           </button>
         </li>
