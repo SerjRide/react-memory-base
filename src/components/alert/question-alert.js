@@ -5,7 +5,7 @@ import './alert.css'
 const CategoryAlert = () => {
   return(
     <div className="alert alert-success">
-      <b>Success!</b> Сategory added
+      <b>Success!</b> Question added
     </div>
   )
 };

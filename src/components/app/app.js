@@ -8,7 +8,7 @@ import QuestionList from '../question-list';
 import Question from '../question';
 import Empty from '../empty';
 import { CategoryForm, QuestionForm } from '../form';
-import { CategoryAlert } from '../alert';
+import { CategoryAlert, QuestionAlert } from '../alert';
 
 import Row from '../row';
 
@@ -16,7 +16,8 @@ export default class App extends Component {
 
   state = {
     rightContent: 'empty',
-    alert: false
+    categoryAlert: false,
+    questionAlert: false
   };
 
   // componentDidUpdate(prevProps, prevState) {
@@ -50,27 +51,25 @@ export default class App extends Component {
 
   getCategoryName = () => {
     const text = document.getElementById('categoryName').value
-    console.log(`getCategoryName ${text}`)
     this.setState({
-      newCategoryName: text
+      newCategoryName: text,
+      categoryAlert: true
     })
+    document.getElementById('categoryName').value = '';
+    setTimeout(() => this.setState({ categoryAlert:false }),2000);
   };
 
   getNewQuestion = () => {
     const question = document.getElementById('question-form').value
     const answer = document.getElementById('answer-form').value
-    console.log(`Create question ${question}`);
-    console.log(`Create answer ${answer}`);
     this.setState({
       newQuestion: question,
-      newAnswer: answer
+      newAnswer: answer,
+      questionAlert: true
     })
-  }
-
-  getAlert = () => {
-    console.log('getAlert')
-    this.setState({ alert:true });
-    setTimeout(() => this.setState({ alert:false }), 2000);
+    document.getElementById('question-form').value = '';
+    document.getElementById('answer-form').value = '';
+    setTimeout(() => this.setState({ questionAlert:false }),2000);
   }
 
   onBackToList = () => this.onCategorySelect(this.state.currentCategory);
@@ -106,14 +105,20 @@ export default class App extends Component {
       <React.Fragment>
         <CategoryForm getCategoryName={ this.getCategoryName }/>
         <Categories
-           getAlert={ this.getAlert }
+           getAlert={ this.getCategoryAlert }
            onCategorySelect={ this.onCategorySelect }
            onDelCategory={ this.onDelCategory }
            newCategoryName={ this.state.newCategoryName }/>
       </React.Fragment>
     )
 
-    const alert = this.state.alert ? <CategoryAlert /> : null
+    let alert = null;
+
+    if (this.state.categoryAlert) {
+      alert = <CategoryAlert />
+    } else if (this.state.questionAlert) {
+      alert = <QuestionAlert />
+    }
 
     return (
       <div className="app">

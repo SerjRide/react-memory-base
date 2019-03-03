@@ -33,7 +33,6 @@ export default class Categories extends Component {
     console.log(name);
     createCategory(name);
     this.setState({update: this.state.update + 1 });
-    this.props.getAlert();
   };
 
   delCategory = (id) => {
