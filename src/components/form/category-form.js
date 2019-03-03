@@ -22,6 +22,13 @@ const CategoryForm = (props) => {
   const resetStyle = () => document.getElementById('categoryName')
                                    .classList.remove('warning')
 
+  const onKeyEnter = (e,func) => {
+    if (e.which === 13) {
+      e.preventDefault();
+      func();
+    }
+  }
+
   return(
     <ul className="list-group">
       <li className="list-group-item no-active">
@@ -31,6 +38,7 @@ const CategoryForm = (props) => {
         <form>
           <div className ="form-group">
             <input type="text" onClick={ resetStyle }
+              onKeyDown={ (e) => onKeyEnter(e,check) }
               className="form-control"
               id="categoryName"
               placeholder="Enter category name" />

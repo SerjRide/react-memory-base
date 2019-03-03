@@ -99,9 +99,11 @@ const removeCategory = (i) => {
 };
 
 const createQuestion = (currentCategory, question, answer) => {
+  const timeStamp = Date.now()
   QuestionData[currentCategory].push({
     question: question,
-    answer: answer
+    answer: answer,
+    date:timeStamp
   });
   setBase(QuestionData);
 };
@@ -110,10 +112,6 @@ const removeQuestion = (currentCategory, i) => {
   QuestionData[currentCategory].splice(i,1);
   setBase(QuestionData);
 }
-
-// createQuestion(2,'Lorem ipsum?','Lorem ipsum dolores');
-
-// removeQuestion(2,4)
 
 export {
   QuestionData,

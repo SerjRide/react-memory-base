@@ -37,7 +37,6 @@ export default class QuestionList extends Component {
 
   delQuestion = (id) => {
     if (window.confirm('Are you sure?')) {
-      console.log(this.props.id)
       removeQuestion(this.props.id,id);
       this.setState({update: this.state.update + 1 });
     };
@@ -80,8 +79,8 @@ export default class QuestionList extends Component {
 
       let { question } = item;
 
-      if (String(question).length > 45) {
-        question = question.substring(0,45) + '...';
+      if (String(question).length > 30) {
+        question = question.substring(0,30) + '...';
       }
 
       if ( i !== 0 ) {

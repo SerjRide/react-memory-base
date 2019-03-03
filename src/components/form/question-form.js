@@ -41,6 +41,13 @@ const QuestionForm = (props) => {
 
   }
 
+  const onKeyEnter = (e,func) => {
+    if (e.which === 13) {
+      e.preventDefault();
+      func();
+    }
+  }
+
   const resetStyle = (e) => e.target.classList.remove('warning');
 
   return(
@@ -58,13 +65,14 @@ const QuestionForm = (props) => {
           <div className="form-row">
             <div className ="form-group question">
               <textarea type="text"
-                id="question-form" onClick={ (e) => resetStyle(e) }
+                id="question-form" onChange={ (e) => resetStyle(e) }
                 aria-describedby="emailHelp"
                 placeholder="New question" />
             </div>
             <div className ="form-group question">
               <textarea type="text"
-                id="answer-form" onClick={ (e) => resetStyle(e) }
+                id="answer-form" onChange={ (e) => resetStyle(e) }
+                onKeyDown={ (e) => onKeyEnter(e,check) }
                 aria-describedby="emailHelp"
                 placeholder="Add answer" />
             </div>
