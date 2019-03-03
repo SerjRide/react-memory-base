@@ -5,7 +5,7 @@ import './alert.css'
 const CorrectAlert = () => {
   return(
     <div className="alert alert-success">
-      <b>Success!</b> You answered correctly
+      <b>Success!</b> Question added
     </div>
   )
 };
