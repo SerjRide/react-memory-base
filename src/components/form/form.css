@@ -1,3 +1,7 @@
+#question_form {
+  display: none;
+}
+
 .list-group-item.no-active form {
   width: 100%;
   background-color: white;
@@ -21,5 +25,28 @@
 
 
 .list-group-item.no-active form input:focus {
-  box-shadow: 0 0 9px 0rem rgba(75, 191, 115, 0.86)
+  box-shadow: 0 0 0px 0rem rgba(75, 191, 115, 0.86)
+}
+
+.form-row {
+  margin-left: 0;
+  width: 100%;
+}
+
+.list-group-item.no-active form .form-group.question {
+  height: 44%;
+}
+
+.form-row textarea {
+  width: 100%;
+  resize: none;
+  border: 0;
+  border-top: solid 1px #D4D4D4;
+  margin-top: -1px;
+  height: 100px;
+  padding: 10px 20px;
+}
+
+.list-group-item.no-active form .form-group.question {
+  width: 100%;
 }

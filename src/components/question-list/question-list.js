@@ -18,15 +18,20 @@ export default class QuestionList extends Component {
   };
 
   componentDidUpdate(prevProps,prevState) {
-    const { id } = this.props, { update } = this.state;
+    const { id, newQuestion, newAnswer } = this.props;
+    const { update } = this.state;
     if (id !== prevProps.id || update !== prevState.update){
       this.renderList();
     };
+    if (newQuestion !== prevProps.newQuestion) {
+      this.addQuestion(newQuestion, newAnswer);
+      this.renderList();
+    }
   };
 
-  addQuestion = () => {
+  addQuestion = (question, answer) => {
     const { id } = this.props
-    createQuestion(id, 'Lorem ipsum?', 'Lorem ipsum dolore');
+    createQuestion(id, question, answer);
     this.setState({update: this.state.update + 1 });
   };
 
@@ -36,6 +41,13 @@ export default class QuestionList extends Component {
       removeQuestion(this.props.id,id);
       this.setState({update: this.state.update + 1 });
     };
+  };
+
+  showForm = () => {
+    const hideObj = document.getElementById('question_list');
+    const showObj = document.getElementById('question_form');
+    showObj.style.display = 'block';
+    hideObj.style.display = 'none';
   };
 
   renderBlock = (text, i, func, btn) => {
@@ -82,12 +94,12 @@ export default class QuestionList extends Component {
     const { items } = this.state;
 
     return(
-      <ul className="list-group">
+      <ul className="list-group" id="question_list">
         <li className="list-group-item no-active">
           <Link to="/" className="item">Choice of question:</Link>
           <button
-             type="button" onClick={ this.addQuestion }
-             className="btn btn-secondary">
+             type="button" onClick={ this.showForm }
+             className="btn btn-secondary list">
              <i className="fas fa-plus"></i>
           </button>
         </li>
