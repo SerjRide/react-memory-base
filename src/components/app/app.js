@@ -95,7 +95,9 @@ export default class App extends Component {
     if (rightContent === 'question list') {
       right = (
         <React.Fragment>
-          <QuestionForm getNewQuestion={ this.getNewQuestion }/>
+          <QuestionForm
+             getNewQuestion={ this.getNewQuestion }
+             currentCategory={ currentCategory }/>
           <QuestionList id = { currentCategory }
              onQuestionSelect = { this.onQuestionSelect }
              onAddQuestion = { this.onAddQuestion }
@@ -107,6 +109,7 @@ export default class App extends Component {
 
     if (rightContent === 'show question') {
       right = <Question
+                   getCategoryName={ () => console.log('getCategoryName') }
                    getTrueAnswer={ this.getTrueAnswer }
                    onBackToList={ this.onBackToList }
                    currentQuestion={ currentQuestion }

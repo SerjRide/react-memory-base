@@ -7,6 +7,21 @@ const CategoryForm = (props) => {
 
   const { getCategoryName } = props
 
+  const check = () => {
+    const { value } = document.getElementById('categoryName')
+
+    if (String(value).length !== 0) {
+      getCategoryName();
+      document.getElementById('categoryName')
+              .classList.remove('warning')
+    } else document.getElementById('categoryName')
+              .className += ' warning'
+
+  }
+
+  const resetStyle = () => document.getElementById('categoryName')
+                                   .classList.remove('warning')
+
   return(
     <ul className="list-group">
       <li className="list-group-item no-active">
@@ -15,14 +30,13 @@ const CategoryForm = (props) => {
       <li className="list-group-item no-active">
         <form>
           <div className ="form-group">
-            <input type="text"
+            <input type="text" onClick={ resetStyle }
               className="form-control"
               id="categoryName"
-              aria-describedby="emailHelp"
               placeholder="Enter category name" />
           </div>
           <button
-             type="button" onClick={ getCategoryName }
+             type="button" onClick={ check }
              className="btn btn-secondary list">
              <i className="fas fa-plus"></i>
           </button>

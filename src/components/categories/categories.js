@@ -29,10 +29,8 @@ export default class Categories extends Component {
   };
 
   addCategory = (name) => {
-    console.log('add category');
-    console.log(name);
-    createCategory(name);
-    this.setState({update: this.state.update + 1 });
+      createCategory(name);
+      this.setState({update: this.state.update + 1 });
   };
 
   delCategory = (id) => {
