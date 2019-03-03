@@ -16,15 +16,22 @@ export default class Categories extends Component {
     this.renderList();
   }
 
-  componentDidUpdate(p,prevState) {
+  componentDidUpdate(prevProps,prevState) {
+    const { categoryName } = this.props;
     if (this.state.update !== prevState.update){
+      this.renderList();
+    }
+
+    if (categoryName !== prevProps.categoryName) {
+      this.addCategory(categoryName);
       this.renderList();
     }
   };
 
-  addCategory = () => {
+  addCategory = (name) => {
     console.log('add category');
-    createCategory('New Category');
+    console.log(name);
+    createCategory(name);
     this.setState({update: this.state.update + 1 });
   };
 
@@ -68,14 +75,6 @@ export default class Categories extends Component {
 
     return(
       <ul className="list-group">
-        <li className="list-group-item no-active">
-          <Link to="/" className="item">Category Selection:</Link>
-          <button onClick={ this.addCategory }
-             type="button"
-             className="btn btn-secondary">
-             <i className="fas fa-plus"></i>
-          </button>
-        </li>
         {items}
       </ul>
     );

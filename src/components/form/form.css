@@ -1,0 +1,25 @@
+.list-group-item.no-active form {
+  width: 100%;
+  background-color: white;
+}
+
+.list-group-item.no-active form input {
+  background-color: white;
+  padding-left: 20px;
+  width: 99.5%;
+}
+
+.list-group-item.no-active form {
+  display: flex;
+  margin-bottom: -1px;
+}
+
+.list-group-item.no-active form .form-group {
+  margin-bottom: 0;
+  width: 90%;
+}
+
+
+.list-group-item.no-active form input:focus {
+  box-shadow: 0 0 9px 0rem rgba(75, 191, 115, 0.86)
+}

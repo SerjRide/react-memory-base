@@ -7,25 +7,27 @@ import Categories from '../categories';
 import QuestionList from '../question-list';
 import Question from '../question';
 import Empty from '../empty';
+import { CategoryForm } from '../form';
 
 import Row from '../row';
 
 export default class App extends Component {
 
   state = {
-    questionArea: 'empty'
+    rightContent: 'empty',
+    leftContent: 'empty'
   };
 
   onCategorySelect = (id) => {
     this.setState({
-      questionArea: 'question list',
+      rightContent: 'question list',
       currentCategory: id
     });
   };
 
   onQuestionSelect = (id) => {
     this.setState({
-      questionArea: 'show question',
+      rightContent: 'show question',
       currentQuestion: id
     });
   };
@@ -36,35 +38,57 @@ export default class App extends Component {
 
   onDelCategory = () => {
     console.log(`APP del category`)
-    this.setState({questionArea: 'empty'})
+    this.setState({rightContent: 'empty'})
+  };
+
+  getCategoryName = () => {
+    const text = document.getElementById('categoryName').value
+    console.log(`getCategoryName ${text}`)
+    this.setState({
+      leftContent: 'empty',
+      categoryName: text
+    })
   };
 
   render() {
 
-    const { questionArea, currentCategory, currentQuestion } = this.state
-    let content = <Empty />
+    const { rightContent, currentCategory,
+              currentQuestion, leftContent } = this.state
 
-    if (questionArea === 'empty') content = <Empty />
-    else if (questionArea === 'question list') {
-      content = <QuestionList id = { currentCategory }
-                  onQuestionSelect = { this.onQuestionSelect }
-                  onAddQuestion = { this.onAddQuestion }/>
+    let right = <Empty />
+
+    if (rightContent === 'question list') {
+      right = <QuestionList id = { currentCategory }
+                   onQuestionSelect = { this.onQuestionSelect }
+                   onAddQuestion = { this.onAddQuestion }/>
     }
-    else if (questionArea === 'show question') {
-      content = <Question
-                  currentQuestion={ currentQuestion }
-                  currentCategory={ currentCategory }/>
+
+    if (rightContent === 'show question') {
+      right = <Question
+                   currentQuestion={ currentQuestion }
+                   currentCategory={ currentCategory }/>
+    }
+
+    let left = (
+      <React.Fragment>
+        <CategoryForm getCategoryName={ this.getCategoryName }/>
+        <Categories
+           onCategorySelect={ this.onCategorySelect }
+           onDelCategory={ this.onDelCategory }
+           categoryName={ this.state.categoryName }/>
+      </React.Fragment>
+    )
+
+    if (leftContent === 'create_category') {
+      left = <CategoryForm
+                   getCategoryName={ this.getCategoryName }/>
     }
 
     return (
       <div className="app">
-          <Header />
-          <Router>
-          <Row
-            left={<Categories
-                   onCategorySelect={ this.onCategorySelect }
-                   onDelCategory={ this.onDelCategory }/>}
-            right={content}/>
+        <Header />
+        <Router>
+          <Row left={left} right={right}/>
         </Router>
       </div>
     );
