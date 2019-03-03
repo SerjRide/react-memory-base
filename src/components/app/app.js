@@ -8,14 +8,22 @@ import QuestionList from '../question-list';
 import Question from '../question';
 import Empty from '../empty';
 import { CategoryForm, QuestionForm } from '../form';
+import { CategoryAlert } from '../alert';
 
 import Row from '../row';
 
 export default class App extends Component {
 
   state = {
-    rightContent: 'empty'
+    rightContent: 'empty',
+    alert: false
   };
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (this.state.alert !== prevState.alert){
+  //
+  //   }
+  // }
 
   onCategorySelect = (id) => {
     this.setState({
@@ -44,7 +52,7 @@ export default class App extends Component {
     const text = document.getElementById('categoryName').value
     console.log(`getCategoryName ${text}`)
     this.setState({
-      categoryName: text
+      newCategoryName: text
     })
   };
 
@@ -58,6 +66,14 @@ export default class App extends Component {
       newAnswer: answer
     })
   }
+
+  getAlert = () => {
+    console.log('getAlert')
+    this.setState({ alert:true });
+    setTimeout(() => this.setState({ alert:false }), 2000);
+  }
+
+  onBackToList = () => this.onCategorySelect(this.state.currentCategory);
 
   render() {
 
@@ -81,6 +97,7 @@ export default class App extends Component {
 
     if (rightContent === 'show question') {
       right = <Question
+                   onBackToList={ this.onBackToList }
                    currentQuestion={ currentQuestion }
                    currentCategory={ currentCategory }/>
     }
@@ -89,14 +106,18 @@ export default class App extends Component {
       <React.Fragment>
         <CategoryForm getCategoryName={ this.getCategoryName }/>
         <Categories
+           getAlert={ this.getAlert }
            onCategorySelect={ this.onCategorySelect }
            onDelCategory={ this.onDelCategory }
-           categoryName={ this.state.categoryName }/>
+           newCategoryName={ this.state.newCategoryName }/>
       </React.Fragment>
     )
 
+    const alert = this.state.alert ? <CategoryAlert /> : null
+
     return (
       <div className="app">
+        { alert }
         <Header />
         <Router>
           <Row left={left} right={right}/>

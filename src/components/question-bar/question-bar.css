@@ -2,13 +2,14 @@
   border: solid 1px #E2E2E2;
   width: 100%;
   height: 48px;
+  margin-top: -1px;
 }
 
 .btn.btn-secondary {
   padding-top: 0;
   padding-bottom: 0;
   padding-left: 4%;
-  background-color: #f4fcef;
+  background-color: #fff;
   width: 5%;
   height: 45px;
 }
@@ -25,9 +26,23 @@ input::-webkit-inner-spin-button {
 
 input[type='number'] {
   cursor: pointer;
-  background-color: #f4fcef;
+  background-color: #fff;
   padding-left: 0;
   padding-right: 0;
     text-align: center;
     -moz-appearance: textfield;
+}
+
+a.crumb {
+  font-weight: lighter;
+}
+
+a.crumb:hover {
+  text-decoration: underline;
+}
+
+a.crumb i {
+  margin: 0;
+  padding-right: 13px;
+  margin-top: 6px;
 }

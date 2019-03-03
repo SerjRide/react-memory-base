@@ -77,15 +77,23 @@ export default class QuestionList extends Component {
   renderList = () => {
     const { onQuestionSelect, id, onAddQuestion } = this.props
     let items = QuestionData[id].map((item, i) => {
-      const { question } = item;
+
+      let { question } = item;
+
+      if (String(question).length > 45) {
+        question = question.substring(0,45) + '...';
+      }
+
       if ( i !== 0 ) {
         return this.renderBlock(question,i,() => onQuestionSelect(i), true)
       } else return null
+
     });
 
     if (items.length === 1) {
       items = this.renderBlock('Add answers', false, onAddQuestion, false)
     }
+
     this.setState({items: items});
   };
 
@@ -99,7 +107,7 @@ export default class QuestionList extends Component {
           <Link to="/" className="item">Choice of question:</Link>
           <button
              type="button" onClick={ this.showForm }
-             className="btn btn-secondary list">
+             className="btn btn-secondary list head">
              <i className="fas fa-plus"></i>
           </button>
         </li>

@@ -20,7 +20,7 @@ const QuestionForm = (props) => {
         <Link to="/" className="item">Add new question:</Link>
         <button
            type="button" onClick={ hideQuestionForm }
-           className="btn btn-secondary list">
+           className="btn btn-secondary list head">
            <i className="fas fa-chevron-up"></i>
         </button>
       </li>
@@ -31,7 +31,7 @@ const QuestionForm = (props) => {
               <textarea type="text"
                 id="question-form"
                 aria-describedby="emailHelp"
-                placeholder="Add question" />
+                placeholder="New question" />
             </div>
             <div className ="form-group question">
               <textarea type="text"

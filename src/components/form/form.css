@@ -2,6 +2,10 @@
   display: none;
 }
 
+.btn.btn-secondary.head {
+  background-color: #f4fcef;
+}
+
 .list-group-item.no-active form {
   width: 100%;
   background-color: white;
@@ -38,15 +42,19 @@
 }
 
 .form-row textarea {
+  margin-top: 1px;
   width: 100%;
   resize: none;
   border: 0;
-  border-top: solid 1px #D4D4D4;
-  margin-top: -1px;
+  border-bottom: solid 1px #D4D4D4;
   height: 100px;
   padding: 10px 20px;
 }
 
 .list-group-item.no-active form .form-group.question {
   width: 100%;
+}
+
+.list-group-item.no-active form button.add {
+  margin-top: -5px;
 }

@@ -12,7 +12,7 @@ export default class Question extends Component {
     help: 0
   };
 
-  onAddClick = () => console.log('onAddClick');
+  onAddQuestion = () => console.log('onAddQuestion');
 
   onBookmarksClick = () => console.log('onBookmarksClick');
 
@@ -82,16 +82,19 @@ export default class Question extends Component {
   };
 
   render(){
-    const { currentCategory } = this.props;
+    const { currentCategory, onBackToList } = this.props;
     const { currentQuestion, help } = this.state;
     const { question, answer } = QuestionData[currentCategory][currentQuestion];
+    const categoryName = QuestionData[currentCategory][0].name;
 
     return(
       <React.Fragment>
         <QuestionBar
+          categoryName={ categoryName }
+          onBackToList={ onBackToList }
           onQuestionClick={ this.onQuestionClick }
           currentQuestion={ currentQuestion }
-          onAddClick = { this.onAddClick }
+          onAddQuestion = { this.onAddQuestion }
           onBookmarksClick = { this.onBookmarksClick }
           onFirstClick = { this.onFirstClick }
           onPrevClick = { this.onPrevClick }

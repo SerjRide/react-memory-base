@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import './question-bar.css';
 
@@ -14,15 +15,25 @@ export default class QuestionBar extends Component  {
 
   render(){
     const { currentQuestion , onPrevClick, onNextClick, onQuestionClick,
-     onAddClick, onBookmarksClick, onFirstClick, onEnterSelect,
-     onLastClick, onHelpClick, onDelClick } = this.props;
+     onAddQuestion, onBookmarksClick, onFirstClick, onEnterSelect,
+     onLastClick, onHelpClick, onDelClick, onBackToList,
+      categoryName } = this.props;
 
     return(
+      <React.Fragment>
+      <ul className="list-group" id="question_list">
+        <li className="list-group-item no-active">
+          <Link to="/" className="item crumb"
+            onClick={ onBackToList }>
+            <i className="fas fa-chevron-left crumb"></i>{ categoryName }
+          </Link>
+        </li>
+      </ul>
       <div className="btn-group btn-group-md"
            role="group"
            aria-label="Basic example">
         <button
-           type="button" onClick={ onAddClick }
+           type="button" onClick={ onAddQuestion }
            className="btn btn-secondary">
            <i className="fas fa-plus"></i>
         </button>
@@ -72,6 +83,7 @@ export default class QuestionBar extends Component  {
            <i className="far fa-trash-alt"></i>
         </button>
       </div>
+      </React.Fragment>
     )
   }
 

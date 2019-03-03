@@ -17,13 +17,13 @@ export default class Categories extends Component {
   }
 
   componentDidUpdate(prevProps,prevState) {
-    const { categoryName } = this.props;
+    const { newCategoryName } = this.props;
     if (this.state.update !== prevState.update){
       this.renderList();
     }
 
-    if (categoryName !== prevProps.categoryName) {
-      this.addCategory(categoryName);
+    if (newCategoryName !== prevProps.newCategoryName) {
+      this.addCategory(newCategoryName);
       this.renderList();
     }
   };
@@ -33,6 +33,7 @@ export default class Categories extends Component {
     console.log(name);
     createCategory(name);
     this.setState({update: this.state.update + 1 });
+    this.props.getAlert();
   };
 
   delCategory = (id) => {
