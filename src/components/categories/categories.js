@@ -36,7 +36,6 @@ export default class Categories extends Component {
   };
 
   renameCategory = (id) => {
-    console.log('rename');
     this.props.getCategoryRename()
     const { value } = document.getElementById(`rename_${id}`)
     rename(id, value);
