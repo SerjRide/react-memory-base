@@ -15,7 +15,8 @@ import {
 import {
   CategoryAlert,
   QuestionAlert,
-  CorrectAlert } from '../alert';
+  CorrectAlert,
+  QuestionRenameAlert } from '../alert';
 
 import Row from '../row';
 
@@ -26,6 +27,7 @@ export default class App extends Component {
     categoryAlert: false,
     questionAlert: false,
     correctAlert: false,
+    questionRenameAlert: false,
     editQuestion: 0,
     badge: 1
   };
@@ -68,6 +70,13 @@ export default class App extends Component {
     })
     document.getElementById('categoryName').value = '';
     setTimeout(() => this.setState({ categoryAlert:false }),2000);
+  };
+
+  getCategoryRename = () => {
+    console.log('alert!')
+    this.setState({
+      questionRenameAlert: true
+    })
   };
 
   getNewQuestion = () => {
@@ -133,8 +142,8 @@ export default class App extends Component {
       <React.Fragment>
         <CategoryForm getCategoryName={ this.getCategoryName }/>
         <Categories
+           getCategoryRename={ this.getCategoryRename }
            badge={ badge }
-           getAlert={ this.getCategoryAlert }
            onCategorySelect={ this.onCategorySelect }
            onDelCategory={ this.onDelCategory }
            newCategoryName={ this.state.newCategoryName }/>
@@ -149,6 +158,8 @@ export default class App extends Component {
       alert = <QuestionAlert />
     } else if (this.state.correctAlert) {
       alert = <CorrectAlert />
+    } else if (this.state.questionRenameAlert) {
+      alert = <QuestionRenameAlert />
     }
 
     return (
