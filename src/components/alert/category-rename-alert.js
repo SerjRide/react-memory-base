@@ -2,12 +2,12 @@ import React from 'react';
 
 import './alert.css'
 
-const QuestionRenameAlert = () => {
+const CategoryRenameAlert = () => {
   return(
     <div className="alert alert-success">
-      <b>Success!</b> Question rename
+      <b>Success!</b> Category renamed
     </div>
   )
 };
 
-export default QuestionRenameAlert;
+export default CategoryRenameAlert;

@@ -19,6 +19,7 @@ const QuestionChangeForm = (props) => {
     if (String(question).length !== 0 && String(answer).length !== 0) {
       props.editQuestion()
       hideQuestionForm();
+      props.questionRenameAlert();
     }
 
     if (String(question).length !== 0) {
@@ -34,7 +35,7 @@ const QuestionChangeForm = (props) => {
       document.getElementById('answer-edit')
                 .className += ' warning'
     }
-  
+
   }
 
   const onKeyEnter = (e,func) => {
