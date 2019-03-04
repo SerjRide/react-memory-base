@@ -2,6 +2,10 @@
   display: none;
 }
 
+#question_edit{
+  display: none;
+}
+
 .btn.btn-secondary.head {
   background-color: #f4fcef;
 }

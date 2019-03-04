@@ -7,7 +7,10 @@ import Categories from '../categories';
 import QuestionList from '../question-list';
 import Question from '../question';
 import Empty from '../empty';
-import { CategoryForm, QuestionForm } from '../form';
+import {
+  CategoryForm,
+  QuestionForm,
+  QuestionChangeForm } from '../form';
 
 import {
   CategoryAlert,
@@ -22,7 +25,8 @@ export default class App extends Component {
     rightContent: 'empty',
     categoryAlert: false,
     questionAlert: false,
-    correctAlert: false
+    correctAlert: false,
+    editQuestion: 0
   };
 
   // componentDidUpdate(prevProps, prevState) {
@@ -76,16 +80,19 @@ export default class App extends Component {
   }
 
   getTrueAnswer = () => {
-    console.log('true_answer');
     this.setState({ correctAlert: true });
     setTimeout(() => this.setState({ correctAlert:false }),2000);
   };
+
+  editQuestion = () => {
+    this.setState({ editQuestion: this.state.editQuestion + 1 });
+  }
 
   onBackToList = () => this.onCategorySelect(this.state.currentCategory);
 
   render() {
 
-    const { rightContent, currentCategory,
+    const { rightContent, currentCategory, editQuestion,
             currentQuestion, newQuestion, newAnswer } = this.state
 
     let right = <Empty />
@@ -93,10 +100,12 @@ export default class App extends Component {
     if (rightContent === 'question list') {
       right = (
         <React.Fragment>
+          <QuestionChangeForm editQuestion={ this.editQuestion }/>
           <QuestionForm
              getNewQuestion={ this.getNewQuestion }
              currentCategory={ currentCategory }/>
           <QuestionList id = { currentCategory }
+             editQuestion = { editQuestion }
              onQuestionSelect = { this.onQuestionSelect }
              onAddQuestion = { this.onAddQuestion }
              newQuestion = { newQuestion }

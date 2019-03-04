@@ -127,12 +127,6 @@ const changeQuestion = (currentCategory,
   setBase(QuestionData);
 }
 
-// rename(2,'TEST');
-
-// changeQuestion(2,1,'New question','New Answer');
-
-// console.log(QuestionData[2][1].question);
-
 export {
   QuestionData,
   createCategory,

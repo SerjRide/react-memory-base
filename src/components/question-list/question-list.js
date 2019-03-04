@@ -5,7 +5,8 @@ import './question-list.css';
 
 import { QuestionData,
          createQuestion,
-         removeQuestion  }from '../../service/question-data';
+         removeQuestion,
+         changeQuestion }from '../../service/question-data';
 
 export default class QuestionList extends Component {
 
@@ -18,7 +19,7 @@ export default class QuestionList extends Component {
   };
 
   componentDidUpdate(prevProps,prevState) {
-    const { id, newQuestion, newAnswer } = this.props;
+    const { id, newQuestion, newAnswer, editQuestion } = this.props;
     const { update } = this.state;
     if (id !== prevProps.id || update !== prevState.update){
       this.renderList();
@@ -26,6 +27,9 @@ export default class QuestionList extends Component {
     if (newQuestion !== prevProps.newQuestion) {
       this.addQuestion(newQuestion, newAnswer);
       this.renderList();
+    }
+    if (editQuestion !== prevProps.editQuestion) {
+      this.editCurrentQuestion(this.state.currentQuestion)
     }
   };
 
@@ -49,18 +53,54 @@ export default class QuestionList extends Component {
     hideObj.style.display = 'none';
   };
 
+  showEdit = (e) => {
+    this.setState({currentQuestion:e})
+    document.getElementById('question_edit').style.display = 'block';
+
+    const { id } = this.props;
+    const thisQuestion = QuestionData[id][e].question
+    const thisAnswer = QuestionData[id][e].answer
+
+    document.getElementById('question-edit').value = thisQuestion
+    document.getElementById('answer-edit').value = thisAnswer
+
+    document.getElementById('question_list').style.display = 'none';
+  }
+
+  editCurrentQuestion = (id) => {
+
+    console.log('question-edit');
+
+    const question = String(document.getElementById('question-edit').value)
+    const answer = String(document.getElementById('answer-edit').value)
+
+    const currentCategory = this.props.id;
+    // const { value } = document.getElementById(`rename_${id}`)
+    changeQuestion(currentCategory, id, question, answer)
+    // this.hideForm(id);
+    this.setState({update: this.state.update + 1 });
+  }
+
   renderBlock = (text, i, func, btn) => {
 
     let button = 0;
 
     if (btn) {
       button = (
+        <React.Fragment>
         <button
+           data-title="Edit Question"
+           type="button" onClick={ () => this.showEdit(i) }
+           className="btn btn-secondary list">
+           <i className="far fa-edit"></i>
+        </button>
+        <button
+           data-title="Delete question"
            type="button" onClick={ () => this.delQuestion(i) }
-           className="btn btn-secondary"
-           data-title="Delete question">
+           className="btn btn-secondary">
            <i className="far fa-trash-alt"></i>
         </button>
+        </React.Fragment>
       );
     }else button = null;
 
@@ -107,7 +147,7 @@ export default class QuestionList extends Component {
         <li className="list-group-item no-active">
           <Link to="/" className="item">Select question from { name }</Link>
           <button
-             type="button" onClick={ this.showForm }
+             type="button" onClick={ (e) => this.showForm(e) }
              className="btn btn-secondary list head"
               data-title="Add question">
              <i className="fas fa-plus"></i>
