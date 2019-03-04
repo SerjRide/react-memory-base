@@ -48,7 +48,6 @@ export default class Categories extends Component {
     Все вопросы содержащиеся в этой категории будут удалены безвозвратно!`
     if (window.confirm(text)) {
       this.props.onDelCategory();
-      console.log(`Delete: ${id}`)
       removeCategory(id+1);
       this.setState({update: this.state.update + 1 });
     }

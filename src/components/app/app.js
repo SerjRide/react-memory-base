@@ -31,7 +31,6 @@ export default class App extends Component {
   };
 
   asyncQuestionUpdate = () => {
-    console.log('asyncQuestionUpdate')
     this.setState({badge: this.state.badge + 1});
   }
 
@@ -58,7 +57,6 @@ export default class App extends Component {
   onAddQuestion = () => console.log('add question');
 
   onDelCategory = () => {
-    console.log(`APP del category`)
     this.setState({ rightContent: 'empty' })
   };
 
@@ -73,7 +71,6 @@ export default class App extends Component {
   };
 
   getNewQuestion = () => {
-    console.log('getNewQuestion')
     const question = document.getElementById('question-form').value
     const answer = document.getElementById('answer-form').value
     this.setState({

@@ -44,6 +44,7 @@ export default class QuestionList extends Component {
     if (window.confirm('Are you sure?')) {
       removeQuestion(this.props.id,id);
       this.setState({update: this.state.update + 1 });
+      this.props.asyncQuestionUpdate();
     };
   };
 
@@ -68,8 +69,6 @@ export default class QuestionList extends Component {
   }
 
   editCurrentQuestion = (id) => {
-
-    console.log('question-edit');
 
     const question = String(document.getElementById('question-edit').value)
     const answer = String(document.getElementById('answer-edit').value)
