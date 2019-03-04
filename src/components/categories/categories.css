@@ -30,3 +30,26 @@
   font-weight: bold;
   background-color: #f4fcef;
 }
+
+.list-group-item input.rename {
+  width: 90%;
+  border:0;
+  padding-left: 21px;
+}
+
+.list-group-item input:focus {
+  outline: 0;
+}
+
+.over_li {
+   list-style-type: none;
+}
+
+.under_ul {
+  padding: 0;
+  margin: 0;
+}
+
+li.rename-form {
+  display: none;
+}

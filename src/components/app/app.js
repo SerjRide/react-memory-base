@@ -45,9 +45,7 @@ export default class App extends Component {
     });
   };
 
-  onAddQuestion = () => {
-    console.log('add question');
-  };
+  onAddQuestion = () => console.log('add question');
 
   onDelCategory = () => {
     console.log(`APP del category`)

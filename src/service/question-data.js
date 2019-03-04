@@ -113,10 +113,32 @@ const removeQuestion = (currentCategory, i) => {
   setBase(QuestionData);
 }
 
+const rename = (currentCategory, newName) => {
+  QuestionData[currentCategory][0].name = newName;
+  setBase(QuestionData);
+}
+
+const changeQuestion = (currentCategory,
+ currentQuestion, newQuestion, newAnswer) => {
+  QuestionData[currentCategory][currentQuestion]
+    .question = newQuestion;
+  QuestionData[currentCategory][currentQuestion]
+    .answer = newAnswer;
+  setBase(QuestionData);
+}
+
+// rename(2,'TEST');
+
+// changeQuestion(2,1,'New question','New Answer');
+
+// console.log(QuestionData[2][1].question);
+
 export {
   QuestionData,
   createCategory,
   removeCategory,
   createQuestion,
-  removeQuestion
+  removeQuestion,
+  rename,
+  changeQuestion
 }
