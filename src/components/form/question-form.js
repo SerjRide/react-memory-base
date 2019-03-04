@@ -24,7 +24,7 @@ const QuestionForm = (props) => {
     if (String(question).length !== 0 && String(answer).length !== 0) {
       getNewQuestion();
     }
-
+    
     if (String(question).length !== 0) {
       document.getElementById('question-form')
               .classList.remove('warning');

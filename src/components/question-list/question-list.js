@@ -34,9 +34,10 @@ export default class QuestionList extends Component {
   };
 
   addQuestion = (question, answer) => {
-    const { id } = this.props
+    const { id, asyncQuestionUpdate } = this.props
     createQuestion(id, question, answer);
     this.setState({update: this.state.update + 1 });
+    asyncQuestionUpdate();
   };
 
   delQuestion = (id) => {
@@ -55,6 +56,7 @@ export default class QuestionList extends Component {
 
   showEdit = (e) => {
     this.setState({currentQuestion:e})
+    document.getElementById('question_list').style.display = 'none';
     document.getElementById('question_edit').style.display = 'block';
 
     const { id } = this.props;
@@ -63,8 +65,6 @@ export default class QuestionList extends Component {
 
     document.getElementById('question-edit').value = thisQuestion
     document.getElementById('answer-edit').value = thisAnswer
-
-    document.getElementById('question_list').style.display = 'none';
   }
 
   editCurrentQuestion = (id) => {

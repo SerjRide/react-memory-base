@@ -9,7 +9,8 @@ import { QuestionData, createCategory,
 export default class Categories extends Component {
 
   state = {
-    update: 0
+    update: 0,
+    badge: 0
   };
 
   componentDidMount(){
@@ -17,8 +18,9 @@ export default class Categories extends Component {
   }
 
   componentDidUpdate(prevProps,prevState) {
-    const { newCategoryName } = this.props;
-    if (this.state.update !== prevState.update){
+    const { newCategoryName, badge } = this.props;
+    const { update } = this.state;
+    if (update !== prevState.update || badge !== prevProps.badge) {
       this.renderList();
     }
 
@@ -74,13 +76,15 @@ export default class Categories extends Component {
     const { onCategorySelect } = this.props;
     const items = QuestionData.map((item, i) => {
       const { name } = item[0], id = i;
+      const { length } = QuestionData[i];
       return (
         <li className="over_li" key={id}>
           <ul className="under_ul">
             <li className="list-group-item" id={`category_${id}`}>
               <Link to="/"
                  onClick={ () => onCategorySelect(id) }>
-                { name }
+                { name } <span className="badge badge-success">
+                {length - 1}</span>
               </Link>
               <button
                  type="button" onClick={ () => this.showForm(id) }

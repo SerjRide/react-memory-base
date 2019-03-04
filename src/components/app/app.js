@@ -26,16 +26,22 @@ export default class App extends Component {
     categoryAlert: false,
     questionAlert: false,
     correctAlert: false,
-    editQuestion: 0
+    editQuestion: 0,
+    badge: 1
   };
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (this.state.alert !== prevState.alert){
-  //
-  //   }
-  // }
+  asyncQuestionUpdate = () => {
+    console.log('asyncQuestionUpdate')
+    this.setState({badge: this.state.badge + 1});
+  }
 
   onCategorySelect = (id) => {
+    if (document.getElementById('question_edit')) {
+      if (document.getElementById('question_edit').style.display === 'block') {
+        document.getElementById('question_list').style.display = 'block';
+        document.getElementById('question_edit').style.display = 'none';
+      }
+    }
     this.setState({
       rightContent: 'question list',
       currentCategory: id
@@ -67,6 +73,7 @@ export default class App extends Component {
   };
 
   getNewQuestion = () => {
+    console.log('getNewQuestion')
     const question = document.getElementById('question-form').value
     const answer = document.getElementById('answer-form').value
     this.setState({
@@ -76,6 +83,7 @@ export default class App extends Component {
     })
     document.getElementById('question-form').value = '';
     document.getElementById('answer-form').value = '';
+
     setTimeout(() => this.setState({ questionAlert:false }),2000);
   }
 
@@ -93,7 +101,7 @@ export default class App extends Component {
   render() {
 
     const { rightContent, currentCategory, editQuestion,
-            currentQuestion, newQuestion, newAnswer } = this.state
+            currentQuestion, newQuestion, newAnswer, badge } = this.state
 
     let right = <Empty />
 
@@ -105,6 +113,7 @@ export default class App extends Component {
              getNewQuestion={ this.getNewQuestion }
              currentCategory={ currentCategory }/>
           <QuestionList id = { currentCategory }
+             asyncQuestionUpdate={ this.asyncQuestionUpdate }
              editQuestion = { editQuestion }
              onQuestionSelect = { this.onQuestionSelect }
              onAddQuestion = { this.onAddQuestion }
@@ -127,6 +136,7 @@ export default class App extends Component {
       <React.Fragment>
         <CategoryForm getCategoryName={ this.getCategoryName }/>
         <Categories
+           badge={ badge }
            getAlert={ this.getCategoryAlert }
            onCategorySelect={ this.onCategorySelect }
            onDelCategory={ this.onDelCategory }

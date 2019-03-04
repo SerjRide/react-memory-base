@@ -6,6 +6,13 @@
   color: #616161;
 }
 
+.badge.badge-success {
+  border-radius: 10px;
+  padding: 4px 7px 3px 7px;
+  background-color: #e6e6e6;
+  color: #000;
+}
+
 .list-group-item button {
   position:relative;
   z-index: 9999;
