@@ -17,16 +17,17 @@ export default class QuestionBar extends Component  {
     const { currentQuestion , onPrevClick, onNextClick, onQuestionClick,
      onAddQuestion, onBookmarksClick, onFirstClick, onEnterSelect,
      onLastClick, onHelpClick, onDelClick, onBackToList,
-      categoryName } = this.props;
+      categoryName, length} = this.props;
 
     return(
       <React.Fragment>
       <ul className="list-group" id="question_list">
-        <li className="list-group-item no-active">
-          <Link to="/" className="item crumb"
+        <li className="list-group-item no-active question-bar-head">
+          <Link to="/" className="item crumb question-bar"
             onClick={ onBackToList }>
             <i className="fas fa-chevron-left crumb"></i>{ categoryName }
           </Link>
+          <i className="right">{currentQuestion} of {length - 1}</i>
         </li>
       </ul>
       <div className="btn-group btn-group-md"

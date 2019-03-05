@@ -5,6 +5,12 @@
   margin-top: -1px;
 }
 
+.question-bar-head .right{
+  margin: 0;
+  width: 22%;
+  padding: 12px 2px 0 15px;
+}
+
 .btn.btn-secondary {
   padding-top: 0;
   padding-bottom: 0;
@@ -47,8 +53,7 @@ a.crumb i {
   margin-top: 6px;
 }
 
-.btn-group.btn-group-md button:hover::after,
-.list-group-item button:hover::after {
+button[data-title]:hover::after {
   position: absolute;
   padding: 11px;
   top:-46px;

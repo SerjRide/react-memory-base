@@ -24,7 +24,7 @@ const QuestionForm = (props) => {
     if (String(question).length !== 0 && String(answer).length !== 0) {
       getNewQuestion();
     }
-    
+
     if (String(question).length !== 0) {
       document.getElementById('question-form')
               .classList.remove('warning');
@@ -56,7 +56,7 @@ const QuestionForm = (props) => {
         <Link to="/" className="item">Add new question on {name}</Link>
         <button
            type="button" onClick={ hideQuestionForm }
-           className="btn btn-secondary list head">
+           className="btn btn-secondary list head no-toggle">
            <i className="fas fa-chevron-up"></i>
         </button>
       </li>

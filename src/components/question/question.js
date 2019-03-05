@@ -91,6 +91,7 @@ export default class Question extends Component {
     return(
       <React.Fragment>
         <QuestionBar
+          length={ QuestionData[this.props.currentCategory].length }
           categoryName={ categoryName }
           onBackToList={ onBackToList }
           onQuestionClick={ this.onQuestionClick }
