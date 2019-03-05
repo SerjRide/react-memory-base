@@ -24,6 +24,7 @@
 .list-group-item.no-active form {
   display: flex;
   margin-bottom: -1px;
+  outline: solid 1px #d5dcd1;
 }
 
 .list-group-item.no-active form .form-group {
