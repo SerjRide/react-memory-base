@@ -31,6 +31,8 @@ export default class App extends Component {
     categoryRenameAlert: false,
     questionRenameAlert: false,
     editQuestion: 0,
+    showEdit: false,
+    thisQuestionEdit: 0,
     badge: 1
   };
 
@@ -51,6 +53,23 @@ export default class App extends Component {
     });
   };
 
+  // Срабатывает, когда я нажимаю edit
+  showEdit = (id) => {
+    console.log(`showEdit ${this.state.currentCategory}`);
+    this.setState({
+      rightContent: 'question list',
+      // Вызывает question-list
+      showEdit: true,
+      thisQuestionEdit: id
+    });
+  };
+
+  didQuestionEdit = (id) => {
+    console.log(`didQuestionEdit ${id}`);
+    this.onQuestionSelect(id)
+    this.setState({showEdit: false});
+  }
+
   onQuestionSelect = (id) => {
     this.setState({
       rightContent: 'show question',
@@ -58,7 +77,6 @@ export default class App extends Component {
     });
   };
 
-  onAddQuestion = () => console.log('add question');
 
   onDelCategory = () => {
     this.setState({ rightContent: 'empty' })
@@ -100,21 +118,22 @@ export default class App extends Component {
     setTimeout(() => this.setState({ questionAlert:false }),2000);
   }
 
+  editQuestion = () => {
+    this.setState({ editQuestion: this.state.editQuestion + 1 });
+  }
+
   getTrueAnswer = () => {
     this.setState({ correctAlert: true });
     setTimeout(() => this.setState({ correctAlert:false }),2000);
   };
-
-  editQuestion = () => {
-    this.setState({ editQuestion: this.state.editQuestion + 1 });
-  }
 
   onBackToList = () => this.onCategorySelect(this.state.currentCategory);
 
   render() {
 
     const { rightContent, currentCategory, editQuestion,
-            currentQuestion, newQuestion, newAnswer, badge } = this.state
+            currentQuestion, newQuestion, newAnswer, badge,
+            showEdit, thisQuestionEdit  } = this.state
 
     let right = <Empty />
 
@@ -122,12 +141,15 @@ export default class App extends Component {
       right = (
         <React.Fragment>
           <QuestionChangeForm
+            didQuestionEdit={ this.didQuestionEdit }
             editQuestion={ this.editQuestion }
             questionRenameAlert= { this.questionRenameAlert }/>
           <QuestionForm
              getNewQuestion={ this.getNewQuestion }
              currentCategory={ currentCategory }/>
           <QuestionList id = { currentCategory }
+             showEdit={ showEdit }
+             thisQuestionEdit = { thisQuestionEdit }
              asyncQuestionUpdate={ this.asyncQuestionUpdate }
              editQuestion = { editQuestion }
              onQuestionSelect = { this.onQuestionSelect }
@@ -140,6 +162,7 @@ export default class App extends Component {
 
     if (rightContent === 'show question') {
       right = <Question
+                   showEdit={ this.showEdit }
                    getCategoryName={ () => console.log('getCategoryName') }
                    getTrueAnswer={ this.getTrueAnswer }
                    onBackToList={ this.onBackToList }

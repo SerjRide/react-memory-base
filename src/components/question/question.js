@@ -12,7 +12,7 @@ export default class Question extends Component {
     help: 0
   };
 
-  onAddQuestion = () => console.log('onAddQuestion');
+  showEdit = (id) =>  this.props.showEdit(id);
 
   onBookmarksClick = () => console.log('onBookmarksClick');
 
@@ -96,7 +96,7 @@ export default class Question extends Component {
           onBackToList={ onBackToList }
           onQuestionClick={ this.onQuestionClick }
           currentQuestion={ currentQuestion }
-          onAddQuestion = { this.onAddQuestion }
+          showEdit = { this.showEdit }
           onBookmarksClick = { this.onBookmarksClick }
           onFirstClick = { this.onFirstClick }
           onPrevClick = { this.onPrevClick }

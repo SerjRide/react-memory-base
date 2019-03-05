@@ -15,7 +15,7 @@ export default class QuestionBar extends Component  {
 
   render(){
     const { currentQuestion , onPrevClick, onNextClick, onQuestionClick,
-     onAddQuestion, onBookmarksClick, onFirstClick, onEnterSelect,
+     showEdit, onBookmarksClick, onFirstClick, onEnterSelect,
      onLastClick, onHelpClick, onDelClick, onBackToList,
       categoryName, length} = this.props;
 
@@ -34,10 +34,10 @@ export default class QuestionBar extends Component  {
            role="group"
            aria-label="Basic example">
         <button
-           type="button" onClick={ onAddQuestion }
-           className="btn btn-secondary"
-           data-title="Add new question">
-           <i className="fas fa-plus"></i>
+           data-title="Edit question"
+           type="button" onClick={ () => showEdit(currentQuestion) }
+           className="btn btn-secondary">
+           <i className="far fa-edit"></i>
         </button>
         <button
            type="button" onClick={ onBookmarksClick }

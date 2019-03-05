@@ -17,7 +17,9 @@ const QuestionChangeForm = (props) => {
     const answer = document.getElementById('answer-edit').value
 
     if (String(question).length !== 0 && String(answer).length !== 0) {
+      const questionId = document.getElementById("hidden_id").value
       props.editQuestion()
+      props.didQuestionEdit(Number(questionId));
       hideQuestionForm();
       props.questionRenameAlert();
     }
@@ -59,6 +61,7 @@ const QuestionChangeForm = (props) => {
         <form>
           <div className="form-row">
             <div className ="form-group question">
+            <input type="hidden" id="hidden_id"/>
               <textarea type="text"
                 aria-describedby="emailHelp"
                 id="question-edit"

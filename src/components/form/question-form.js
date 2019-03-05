@@ -22,6 +22,7 @@ const QuestionForm = (props) => {
     const answer = document.getElementById('answer-form').value
 
     if (String(question).length !== 0 && String(answer).length !== 0) {
+      document.getElementById('question-form').focus()
       getNewQuestion();
     }
 

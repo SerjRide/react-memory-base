@@ -15,11 +15,22 @@ export default class QuestionList extends Component {
   };
 
   componentDidMount(){
+    const { thisQuestionEdit ,showEdit } = this.props;
+    if (showEdit === true) {
+      // Вызываем форму
+      this.showEdit(thisQuestionEdit);
+      // И одновременна вызываем изменение вопроса
+      // В ЭТОМ ОШИБКА
+      this.editCurrentQuestion(thisQuestionEdit);
+    }
     this.renderList();
   };
 
+
+
   componentDidUpdate(prevProps,prevState) {
-    const { id, newQuestion, newAnswer, editQuestion } = this.props;
+    const { id, newQuestion, newAnswer,
+              editQuestion, showEdit} = this.props;
     const { update } = this.state;
     if (id !== prevProps.id || update !== prevState.update){
       this.renderList();
@@ -27,9 +38,6 @@ export default class QuestionList extends Component {
     if (newQuestion !== prevProps.newQuestion) {
       this.addQuestion(newQuestion, newAnswer);
       this.renderList();
-    }
-    if (editQuestion !== prevProps.editQuestion) {
-      this.editCurrentQuestion(this.state.currentQuestion)
     }
   };
 
@@ -64,8 +72,9 @@ export default class QuestionList extends Component {
     const thisQuestion = QuestionData[id][e].question
     const thisAnswer = QuestionData[id][e].answer
 
-    document.getElementById('question-edit').value = thisQuestion
-    document.getElementById('answer-edit').value = thisAnswer
+    document.getElementById('question-edit').value = thisQuestion;
+    document.getElementById('answer-edit').value = thisAnswer;
+    document.getElementById('hidden_id').value = e;
   }
 
   editCurrentQuestion = (id) => {
@@ -74,9 +83,7 @@ export default class QuestionList extends Component {
     const answer = String(document.getElementById('answer-edit').value)
 
     const currentCategory = this.props.id;
-    // const { value } = document.getElementById(`rename_${id}`)
     changeQuestion(currentCategory, id, question, answer)
-    // this.hideForm(id);
     this.setState({update: this.state.update + 1 });
   }
 
