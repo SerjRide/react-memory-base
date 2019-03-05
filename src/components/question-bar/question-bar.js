@@ -86,7 +86,7 @@ export default class QuestionBar extends Component  {
            <i className="fas fa-question"></i>
         </button>
         <button
-           type="button" onClick={ onDelClick }
+           type="button" onClick={ () => onDelClick(currentQuestion) }
            className="btn btn-secondary"
            data-title="Delete question">
            <i className="far fa-trash-alt"></i>

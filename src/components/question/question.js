@@ -3,16 +3,16 @@ import React, { Component } from 'react'
 import QuestionBar from '../question-bar';
 import QuestionArea from '../question-area';
 
-import { QuestionData } from '../../service/question-data';
+import {
+  QuestionData,
+  removeQuestion } from '../../service/question-data';
 
 export default class Question extends Component {
 
   state = {
-    currentQuestion: this.props.currentQuestion,
+    currentQuestion: Number(this.props.currentQuestion),
     help: 0
   };
-
-  showEdit = (id) =>  this.props.showEdit(id);
 
   onBookmarksClick = () => console.log('onBookmarksClick');
 
@@ -47,7 +47,13 @@ export default class Question extends Component {
 
   onHelpClick = () => this.setState({help: this.state.help + 1});
 
-  onDelClick = () => console.log('onDelClick');
+  onDelClick = (currentQuestion) => {
+   const { currentCategory } = this.props
+    if (window.confirm('Are you sure?')) {
+      removeQuestion(currentCategory,currentQuestion);
+      this.onNextClick();
+    };
+  };
 
   onApplyClick = () => {
     const currenAnswer = document.getElementById('answer').value;
@@ -83,37 +89,42 @@ export default class Question extends Component {
   };
 
   render(){
-    const { currentCategory, onBackToList } = this.props;
+    const { currentCategory, onBackToList, onCategorySelect } = this.props;
     const { currentQuestion, help } = this.state;
-    const { question, answer } = QuestionData[currentCategory][currentQuestion];
-    const categoryName = QuestionData[currentCategory][0].name;
+    const obj = QuestionData[currentCategory][currentQuestion]
 
-    return(
-      <React.Fragment>
-        <QuestionBar
-          length={ QuestionData[this.props.currentCategory].length }
-          categoryName={ categoryName }
-          onBackToList={ onBackToList }
-          onQuestionClick={ this.onQuestionClick }
-          currentQuestion={ currentQuestion }
-          showEdit = { this.showEdit }
-          onBookmarksClick = { this.onBookmarksClick }
-          onFirstClick = { this.onFirstClick }
-          onPrevClick = { this.onPrevClick }
-          onNextClick = { this.onNextClick }
-          onLastClick = { this.onLastClick }
-          onHelpClick = { this.onHelpClick }
-          onDelClick = { this.onDelClick }
-          onEnterSelect = { (e) => this.onEnter(e,this.onEnterSelect) }/>
-        <QuestionArea
-          onEnterApply = { (e) => this.onEnter(e,this.onApplyClick) }
-          onApplyClick = { this.onApplyClick }
-          currentCategory = { currentCategory }
-          currentQuestion = { currentQuestion }
-          question = { question }
-          answer = { answer }
-          help = { help }/>
-      </React.Fragment>
-    )
+    if (obj !== undefined) {
+
+      const { question, answer } = QuestionData[currentCategory][currentQuestion];
+      const categoryName = QuestionData[currentCategory][0].name;
+      return(
+        <React.Fragment>
+          <QuestionBar
+            length={ QuestionData[this.props.currentCategory].length }
+            categoryName={ categoryName }
+            onBackToList={ onBackToList }
+            onQuestionClick={ this.onQuestionClick }
+            currentQuestion={ currentQuestion }
+            showEdit = { (id) => this.props.showEdit(id) }
+            onBookmarksClick = { this.onBookmarksClick }
+            onFirstClick = { this.onFirstClick }
+            onPrevClick = { this.onPrevClick }
+            onNextClick = { this.onNextClick }
+            onLastClick = { this.onLastClick }
+            onHelpClick = { this.onHelpClick }
+            onDelClick = { (id) => this.onDelClick(id) }
+            onEnterSelect = { (e) => this.onEnter(e,this.onEnterSelect) }/>
+          <QuestionArea
+            onEnterApply = { (e) => this.onEnter(e,this.onApplyClick) }
+            onApplyClick = { this.onApplyClick }
+            currentCategory = { currentCategory }
+            currentQuestion = { currentQuestion }
+            question = { question }
+            answer = { answer }
+            help = { help }/>
+        </React.Fragment>
+      )
+
+    } return <div onLoad={onCategorySelect()}></div>;
   };
 };

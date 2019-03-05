@@ -5,8 +5,7 @@ import './question-list.css';
 
 import { QuestionData,
          createQuestion,
-         removeQuestion,
-         changeQuestion }from '../../service/question-data';
+         removeQuestion }from '../../service/question-data';
 
 export default class QuestionList extends Component {
 
@@ -15,22 +14,28 @@ export default class QuestionList extends Component {
   };
 
   componentDidMount(){
-    const { thisQuestionEdit ,showEdit } = this.props;
-    if (showEdit === true) {
-      // Вызываем форму
-      this.showEdit(thisQuestionEdit);
-      // И одновременна вызываем изменение вопроса
-      // В ЭТОМ ОШИБКА
-      this.editCurrentQuestion(thisQuestionEdit);
-    }
+    if(this.props.showEdit === true){
+      this.showEdit(this.props.thisQuestionEdit)
+      document.getElementById('question_list').style.display = 'none';
+      document.getElementById('question_edit').style.display = 'block';
+    };
     this.renderList();
   };
 
+  showEdit = (currentQuestion) => {
+    this.setState({currentQuestion: currentQuestion})
 
+    const { id } = this.props;
+    const thisQuestion = QuestionData[id][currentQuestion].question
+    const thisAnswer = QuestionData[id][currentQuestion].answer
+
+    document.getElementById('question-edit').value = thisQuestion;
+    document.getElementById('answer-edit').value = thisAnswer;
+    document.getElementById('hidden_id').value = currentQuestion;
+  }
 
   componentDidUpdate(prevProps,prevState) {
-    const { id, newQuestion, newAnswer,
-              editQuestion, showEdit} = this.props;
+    const { id, newQuestion, newAnswer } = this.props;
     const { update } = this.state;
     if (id !== prevProps.id || update !== prevState.update){
       this.renderList();
@@ -63,29 +68,7 @@ export default class QuestionList extends Component {
     hideObj.style.display = 'none';
   };
 
-  showEdit = (e) => {
-    this.setState({currentQuestion:e})
-    document.getElementById('question_list').style.display = 'none';
-    document.getElementById('question_edit').style.display = 'block';
 
-    const { id } = this.props;
-    const thisQuestion = QuestionData[id][e].question
-    const thisAnswer = QuestionData[id][e].answer
-
-    document.getElementById('question-edit').value = thisQuestion;
-    document.getElementById('answer-edit').value = thisAnswer;
-    document.getElementById('hidden_id').value = e;
-  }
-
-  editCurrentQuestion = (id) => {
-
-    const question = String(document.getElementById('question-edit').value)
-    const answer = String(document.getElementById('answer-edit').value)
-
-    const currentCategory = this.props.id;
-    changeQuestion(currentCategory, id, question, answer)
-    this.setState({update: this.state.update + 1 });
-  }
 
   renderBlock = (text, i, func, btn) => {
 
@@ -94,12 +77,6 @@ export default class QuestionList extends Component {
     if (btn) {
       button = (
         <React.Fragment>
-        <button
-           data-title="Edit Question"
-           type="button" onClick={ () => this.showEdit(i) }
-           className="btn btn-secondary list">
-           <i className="far fa-edit"></i>
-        </button>
         <button
            data-title="Delete question"
            type="button" onClick={ () => this.delQuestion(i) }
@@ -137,7 +114,7 @@ export default class QuestionList extends Component {
     });
 
     if (items.length === 1) {
-      items = this.renderBlock('Add answers', false, onAddQuestion, false)
+      items = this.renderBlock('Category is empty', false, onAddQuestion, false)
     }
 
     this.setState({items: items});

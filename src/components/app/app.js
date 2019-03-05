@@ -40,7 +40,7 @@ export default class App extends Component {
     this.setState({badge: this.state.badge + 1});
   }
 
-  onCategorySelect = (id) => {
+  onCategorySelect = (id = this.state.currentCategory) => {
     if (document.getElementById('question_edit')) {
       if (document.getElementById('question_edit').style.display === 'block') {
         document.getElementById('question_list').style.display = 'block';
@@ -53,16 +53,21 @@ export default class App extends Component {
     });
   };
 
-  // Срабатывает, когда я нажимаю edit
   showEdit = (id) => {
-    console.log(`showEdit ${this.state.currentCategory}`);
     this.setState({
       rightContent: 'question list',
-      // Вызывает question-list
       showEdit: true,
       thisQuestionEdit: id
     });
   };
+
+  returnToQuestion = (id) => {
+    this.onQuestionSelect(id);
+    this.setState({
+      rightContent: 'show question',
+      showEdit: false
+    });
+  }
 
   didQuestionEdit = (id) => {
     console.log(`didQuestionEdit ${id}`);
@@ -141,6 +146,8 @@ export default class App extends Component {
       right = (
         <React.Fragment>
           <QuestionChangeForm
+            returnToQuestion = { (id) => this.returnToQuestion(id) }
+            id = { currentCategory }
             didQuestionEdit={ this.didQuestionEdit }
             editQuestion={ this.editQuestion }
             questionRenameAlert= { this.questionRenameAlert }/>
@@ -162,7 +169,8 @@ export default class App extends Component {
 
     if (rightContent === 'show question') {
       right = <Question
-                   showEdit={ this.showEdit }
+                   onCategorySelect={ (id) => this.onCategorySelect(id) }
+                   showEdit={ (id) => this.showEdit(id) }
                    getCategoryName={ () => console.log('getCategoryName') }
                    getTrueAnswer={ this.getTrueAnswer }
                    onBackToList={ this.onBackToList }

@@ -1,15 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 
+import { changeQuestion } from '../../service/question-data';
+
 import './form.css';
 
 const QuestionChangeForm = (props) => {
 
-  const hideQuestionForm = () => {
-    const showObj = document.getElementById('question_list');
-    const hideObj = document.getElementById('question_edit');
-    hideObj.style.display = 'none';
-    showObj.style.display = 'block';
+  const hideForm = () => {
+    const questionId = document.getElementById("hidden_id").value
+    props.returnToQuestion(questionId);
+  }
+
+  const editCurrentQuestion = (id) => {
+
+    const question = String(document.getElementById('question-edit').value)
+    const answer = String(document.getElementById('answer-edit').value)
+
+    const currentCategory = props.id;
+    changeQuestion(currentCategory, id, question, answer)
   }
 
   const check = () => {
@@ -18,10 +27,8 @@ const QuestionChangeForm = (props) => {
 
     if (String(question).length !== 0 && String(answer).length !== 0) {
       const questionId = document.getElementById("hidden_id").value
-      props.editQuestion()
-      props.didQuestionEdit(Number(questionId));
-      hideQuestionForm();
-      props.questionRenameAlert();
+      editCurrentQuestion(questionId);
+      hideForm();
     }
 
     if (String(question).length !== 0) {
@@ -52,7 +59,7 @@ const QuestionChangeForm = (props) => {
       <li className="list-group-item no-active">
         <Link to="/" className="item">Edit question</Link>
         <button
-           type="button" onClick={ hideQuestionForm }
+           type="button" onClick={ hideForm }
            className="btn btn-secondary list head">
            <i className="fas fa-chevron-up"></i>
         </button>
