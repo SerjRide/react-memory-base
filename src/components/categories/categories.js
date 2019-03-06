@@ -12,7 +12,8 @@ export default class Categories extends Component {
     update: 0,
     badge: 0,
     term: '',
-    visibleItems: QuestionData
+    visibleItems: QuestionData,
+    newCategory: 0
   };
 
   componentDidMount(){
@@ -28,16 +29,19 @@ export default class Categories extends Component {
 
     if (newCategoryName !== prevProps.newCategoryName) {
       this.addCategory(newCategoryName);
-      this.renderList();
+      this.setState({newCategory: this.state.newCategory + 1})
     }
 
     if (visableCategory !== prevProps.visableCategory) {
-      const { term } = this.state;
       const visibleItems = this.search(QuestionData, this.props.visableCategory)
       this.setState({ visibleItems:  visibleItems})
     }
 
     if (this.state.visibleItems !== prevState.visibleItems) {
+      this.renderList();
+    }
+
+    if (this.state.newCategory !== prevState.newCategory){
       this.renderList();
     }
   };
@@ -152,7 +156,7 @@ export default class Categories extends Component {
 
   render(){
 
-    const { items, term } = this.state;
+    const { items } = this.state;
 
     return(
       <ul className="list-group">
