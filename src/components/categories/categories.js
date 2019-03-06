@@ -47,7 +47,9 @@ export default class Categories extends Component {
       return items
     };
     return items.filter((item, i) => {
-      return items[i][0].name.indexOf(term) > -1;
+      return items[i][0].name
+                        .toLowerCase()
+                        .indexOf(term.toLowerCase()) > -1;
     });
   }
 
