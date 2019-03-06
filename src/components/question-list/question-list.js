@@ -80,7 +80,7 @@ export default class QuestionList extends Component {
         <button
            data-title="Delete question"
            type="button" onClick={ () => this.delQuestion(i) }
-           className="btn btn-secondary">
+           className="btn btn-secondary list">
            <i className="far fa-trash-alt"></i>
         </button>
         </React.Fragment>
@@ -98,7 +98,7 @@ export default class QuestionList extends Component {
   };
 
   renderList = () => {
-    const { onQuestionSelect, id, onAddQuestion } = this.props
+    const { onQuestionSelect, id } = this.props
     let items = QuestionData[id].map((item, i) => {
 
       let { question } = item;
@@ -114,7 +114,7 @@ export default class QuestionList extends Component {
     });
 
     if (items.length === 1) {
-      items = this.renderBlock('Category is empty', false, onAddQuestion, false)
+      items = this.renderBlock('+ add new question', false, (e) => this.showForm(e), false)
     }
 
     this.setState({items: items});

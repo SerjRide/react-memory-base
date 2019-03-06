@@ -30,6 +30,7 @@ export default class App extends Component {
     correctAlert: false,
     categoryRenameAlert: false,
     questionRenameAlert: false,
+    visableCategory:0,
     editQuestion: 0,
     showEdit: false,
     thisQuestionEdit: 0,
@@ -98,15 +99,13 @@ export default class App extends Component {
   };
 
   getCategoryRename = () => {
-    this.setState({
-      categoryRenameAlert: true
-    })
+    this.setState({ categoryRenameAlert:true });
+    setTimeout(() => this.setState({ categoryRenameAlert:false }),2000);
   };
 
   questionRenameAlert = () => {
-    this.setState({
-      questionRenameAlert: true
-    })
+    this.setState({ questionRenameAlert:true });
+    setTimeout(() => this.setState({ questionRenameAlert:false }),2000);
   };
 
   getNewQuestion = () => {
@@ -131,6 +130,8 @@ export default class App extends Component {
     this.setState({ correctAlert: true });
     setTimeout(() => this.setState({ correctAlert:false }),2000);
   };
+
+  searchCategory = (value) => this.setState({visableCategory:value})
 
   onBackToList = () => this.onCategorySelect(this.state.currentCategory);
 
@@ -169,6 +170,7 @@ export default class App extends Component {
 
     if (rightContent === 'show question') {
       right = <Question
+                   asyncQuestionUpdate={ this.asyncQuestionUpdate }
                    onCategorySelect={ (id) => this.onCategorySelect(id) }
                    showEdit={ (id) => this.showEdit(id) }
                    getCategoryName={ () => console.log('getCategoryName') }
@@ -180,8 +182,11 @@ export default class App extends Component {
 
     let left = (
       <React.Fragment>
-        <CategoryForm getCategoryName={ this.getCategoryName }/>
+        <CategoryForm
+          searchCategory={ (value) => this.searchCategory(value) }
+          getCategoryName={ this.getCategoryName }/>
         <Categories
+           visableCategory={ this.state.visableCategory }
            getCategoryRename={ this.getCategoryRename }
            badge={ badge }
            onCategorySelect={ this.onCategorySelect }

@@ -19,6 +19,7 @@ const QuestionChangeForm = (props) => {
 
     const currentCategory = props.id;
     changeQuestion(currentCategory, id, question, answer)
+    props.questionRenameAlert()
   }
 
   const check = () => {

@@ -10,7 +10,9 @@ export default class Categories extends Component {
 
   state = {
     update: 0,
-    badge: 0
+    badge: 0,
+    term: '',
+    visibleItems: QuestionData
   };
 
   componentDidMount(){
@@ -18,7 +20,7 @@ export default class Categories extends Component {
   }
 
   componentDidUpdate(prevProps,prevState) {
-    const { newCategoryName, badge } = this.props;
+    const { newCategoryName, badge, visableCategory } = this.props;
     const { update } = this.state;
     if (update !== prevState.update || badge !== prevProps.badge) {
       this.renderList();
@@ -28,7 +30,26 @@ export default class Categories extends Component {
       this.addCategory(newCategoryName);
       this.renderList();
     }
+
+    if (visableCategory !== prevProps.visableCategory) {
+      const { term } = this.state;
+      const visibleItems = this.search(QuestionData, this.props.visableCategory)
+      this.setState({ visibleItems:  visibleItems})
+    }
+
+    if (this.state.visibleItems !== prevState.visibleItems) {
+      this.renderList();
+    }
   };
+
+  search = (items, term) => {
+    if (term.langth === 0 ) {
+      return items
+    };
+    return items.filter((item, i) => {
+      return items[i][0].name.indexOf(term) > -1;
+    });
+  }
 
   addCategory = (name) => {
       createCategory(name);
@@ -74,9 +95,10 @@ export default class Categories extends Component {
 
   renderList = () => {
     const { onCategorySelect } = this.props;
-    const items = QuestionData.map((item, i) => {
+    const { visibleItems } = this.state;
+    const items = visibleItems.map((item, i) => {
       const { name } = item[0], id = i;
-      const { length } = QuestionData[i];
+      const { length } = visibleItems[i];
       return (
         <li className="over_li" key={id}>
           <ul className="under_ul">
@@ -128,7 +150,7 @@ export default class Categories extends Component {
 
   render(){
 
-    const { items } = this.state;
+    const { items, term } = this.state;
 
     return(
       <ul className="list-group">

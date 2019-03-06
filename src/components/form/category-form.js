@@ -5,7 +5,7 @@ import './form.css';
 
 const CategoryForm = (props) => {
 
-  const { getCategoryName } = props
+  const { getCategoryName, searchCategory } = props
 
   const check = () => {
     const { value } = document.getElementById('categoryName')
@@ -33,6 +33,11 @@ const CategoryForm = (props) => {
     <ul className="list-group">
       <li className="list-group-item no-active">
         <Link to="/" className="item">Category Selection:</Link>
+        <input
+          onChange={ (e) => props.searchCategory(e.target.value) }
+          type="text"
+          className="search"
+          placeholder="Search"/>
       </li>
       <li className="list-group-item no-active">
         <form>

@@ -48,9 +48,10 @@ export default class Question extends Component {
   onHelpClick = () => this.setState({help: this.state.help + 1});
 
   onDelClick = (currentQuestion) => {
-   const { currentCategory } = this.props
+   const { currentCategory, asyncQuestionUpdate } = this.props
     if (window.confirm('Are you sure?')) {
       removeQuestion(currentCategory,currentQuestion);
+      asyncQuestionUpdate()
       this.onNextClick();
     };
   };
